@@ -16,16 +16,22 @@ class PlanillaController extends Controller
             return view('auth.login');
         }
     }
-    public function store(Request $request)
-    {
-        $datos=
+    public function store(Request $request){
+        //validacion de formulario
         $request->validate([
             'cliente'=>'required',
+            'contacto'=>'min:10',
             'articulo'=>'required'
         ]);
 
-        $planilla= Planilla::create($datos);
-        return redirect()->route('listado', ['pag' => 1]);
+        $planilla= new Planilla;
+        $planilla->cliente=$request->cliente;
+        $planilla->articulo=$request->articulo;
+        $planilla->contacto=$request->contacto;
+        $planilla->detalle=$request->detalle; 
+        $planilla->save();
+        
+        return redirect()->route('planilla', ['planillaID' => $planilla->id]);
     }
 
     

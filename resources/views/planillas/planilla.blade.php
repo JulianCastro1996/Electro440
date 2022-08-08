@@ -10,19 +10,16 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item text-bg-info d-flex justify-content-between align-items-center">
-                <span><strong>Cliente:</strong> {{$p->cliente}}.</span>
+                <span><strong>Cliente:</strong> {{$p->cliente}}</span>
             </li>
             <li class="list-group-item text-bg-info d-flex justify-content-between align-items-center">
-                <span><strong>Contacto:</strong> {{$p->contacto}}.</span>
+                <span><strong>Contacto:</strong> {{$p->contacto}}</span>
             </li>
             <li class="list-group-item text-bg-info d-flex justify-content-between align-items-center">
-                <span><strong>Articulo:</strong> {{$p->articulo}}.</span>
+                <span><strong>Articulo:</strong> {{$p->articulo}}</span>
             </li>
             <li class="list-group-item text-bg-info d-flex justify-content-between align-items-center">
-                <span><strong>Detalle:</strong>  {{$p->detalle}}.</span>
-            </li>
-            <li class="list-group-item text-bg-info d-flex justify-content-between align-items-center">
-                <span><strong>Cliente:</strong> {{$p->cliente}}.</span>
+                <span><strong>Detalle:</strong>  {{$p->detalle}}</span>
             </li>
         @if ($p->presupuesto != null)
             <li class="list-group-item text-bg-warning d-flex justify-content-between align-items-center">

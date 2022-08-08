@@ -16,12 +16,12 @@ use App\Http\Controllers\PlanillaController;
 */
 
 Route::get('/', function () {
-    return redirect('/home');
+    return redirect('/login');
 });
 
 
-Auth::routes();
-//Auth::routes(["register" => false]);
+//Auth::routes();
+Auth::routes(["register" => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
