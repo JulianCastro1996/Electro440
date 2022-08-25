@@ -1,13 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Aceptacion;
+use App\Models\Entrega;
+use App\Models\Planilla;
+use App\Models\Presupuesto;
+use App\Models\Reparacion;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\Planilla;
-use Illuminate\Http\Request;
-
 class PlanillaController extends Controller
-{   
+{           
+
 
     public function create(){
         if(Auth::check()){
@@ -20,7 +25,6 @@ class PlanillaController extends Controller
         //validacion de formulario
         $request->validate([
             'cliente'=>'required',
-            'contacto'=>'min:10',
             'articulo'=>'required'
         ]);
 
@@ -34,23 +38,40 @@ class PlanillaController extends Controller
         return redirect()->route('planilla', ['planillaID' => $planilla->id]);
     }
 
-    
-    public function mostrarPlanilla($id){
-        $planilla=Planilla::find($id);
-        return view('planillas.planilla',['p'=>$planilla]);
-    }
-
-    public function presupuestar(Request $request){
-
+    public function editarPlanilla(Request $request){
         $request->validate([
-            'presupuesto'=>'required',
+            'cliente'=>'required',
+            'articulo'=>'required'
         ]);
         $planilla=Planilla::find($request->id);
-        $planilla->presupuesto=$request->presupuesto;
-        $planilla->diagnostico=$request->diagnostico; 
+        $planilla->cliente=$request->cliente;
+        $planilla->articulo=$request->articulo;
+        $planilla->contacto=$request->contacto;
+        $planilla->detalle=$request->detalle; 
         $planilla->save();
         
-        return redirect()->route('planilla', ['planillaID' => $request->id]);
+        return redirect()->route('planilla', ['planillaID' => $planilla->id]);
+    }
+    public function buscar(Request $request){
+        $request->validate([
+            'buscar'=>'required'
+        ]);
+        $planillas=Planilla::where('cliente','like','%'.$request->buscar.'%')->get();
+        return view('planillas.planillaList',['planillas'=>$planillas]);
+    }
+    public function mostrarPlanilla($id){
+        $planilla=Planilla::find($id);
+        $presupuesto=Presupuesto::where('planilla_id',$id)->first();
+        $aceptacion=Aceptacion::where('planilla_id',$id)->first();
+        $reparacion=Reparacion::where('planilla_id',$id)->first();
+        $entrega=Entrega::where('planilla_id',$id)->first();
+        return view('planillas.planilla',
+        [   'p'=>$planilla,
+            'presup'=>$presupuesto,
+            'acept'=>$aceptacion,
+            'repar'=>$reparacion,
+            'entrega'=>$entrega,
+        ]);
     }
     
     public function mostrarListaPlanilla($pag=1){
@@ -59,6 +80,7 @@ class PlanillaController extends Controller
     }
 
     public function deletePlanilla($id){
+       
         $planilla=Planilla::find($id);
         $planilla->delete();
         return redirect()->route('listado');

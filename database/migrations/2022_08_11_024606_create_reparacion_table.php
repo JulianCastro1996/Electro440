@@ -13,14 +13,14 @@ class CreateReparacionTable extends Migration
      */
     public function up()
     {
-        Schema::create('reparacion', function (Blueprint $table) {
+        Schema::create('reparacions', function (Blueprint $table) {
             
             $table->bigInteger("planilla_id")->unsigned();
             $table->primary("planilla_id");
             $table->boolean("reparado");
-            $table->string("observacion");
+            $table->string("observacion")->nullable();
             $table->timestamps();
-            $table->foreign("planilla_id")->references("id")->on("planillas");
+            $table->foreign("planilla_id")->references("id")->on("planillas")->constrained()->onDelete('cascade');
         });
     }
 

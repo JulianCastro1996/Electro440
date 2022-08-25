@@ -14,7 +14,5 @@ class Planilla extends Model
         'contacto',
         'articulo',
         'detalle',
-        'presupuesto',
-        'diagnostico'
     ];
 }

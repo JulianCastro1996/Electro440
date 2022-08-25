@@ -13,14 +13,14 @@ class CreateAceptacionTable extends Migration
      */
     public function up()
     {
-        Schema::create('aceptacion', function (Blueprint $table) {
+        Schema::create('aceptacions', function (Blueprint $table) {
             
             $table->bigInteger("planilla_id")->unsigned();
             $table->primary("planilla_id");
             $table->boolean("aceptacion");
-            $table->integer("seña");
+            $table->integer("seña")->nullable();
             $table->timestamps();
-            $table->foreign("planilla_id")->references("id")->on("planillas");
+            $table->foreign("planilla_id")->references("id")->on("planillas")->constrained()->onDelete('cascade');
         });
     }
 

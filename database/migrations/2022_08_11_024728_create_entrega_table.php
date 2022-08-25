@@ -16,13 +16,13 @@ class CreateEntregaTable extends Migration
     public function up()
     {   
         if (Schema::hasTable('planillas')) {
-           Schema::create('entrega', function (Blueprint $table) {
+           Schema::create('entregas', function (Blueprint $table) {
                 $table->bigInteger("planilla_id")->unsigned();
                 $table->primary("planilla_id");
                 $table->boolean("entregado");
-                $table->string("obs_entrega");
+                $table->string("obs_entrega")->nullable();
                 $table->timestamps();
-                $table->foreign("planilla_id")->references("id")->on("planillas");
+                $table->foreign("planilla_id")->references("id")->on("planillas")->constrained()->onDelete('cascade');
            });
         }
         

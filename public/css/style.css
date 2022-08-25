@@ -8,8 +8,7 @@ body {
     background-size: cover;
 }
 .navbar{
-    background-color: rgba(255, 255, 255, 0.7)!important;
-    border-radius: 0px 0px  10px 10px;
+    background-color:#333333!important;
 }
 
 li{
@@ -20,3 +19,55 @@ li{
     font-size: 19px;
     margin-right:10px;
 }
+textarea {
+  resize: none;
+}
+label{
+  color: black!important;
+}
+/*********************************************************************
+/*********************************************************************
+/*********************************************************************/
+.timeline .line .point {
+    list-style-type: none;
+    position: relative;
+    width: 6px;
+    background: rgba(0, 0, 0, 0.988);
+  }
+   
+  .timeline .line .point::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: inherit;
+  }
+  .timeline .line .point .card {
+    position: relative;
+    bottom: 0;
+    width: 300px;
+  }
+   
+  .timeline .line .point .card::before {
+    content: '';
+    position: absolute;
+    bottom: 7px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  .timeline .line .point .card {
+    left: 45px;
+  }
+   
+  .timeline .line .point .card::before {
+    left: -15px;
+    border-width: 8px 16px 8px 0;
+    border-color: transparent #ffffff transparent transparent;
+  }
+
+

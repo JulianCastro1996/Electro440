@@ -13,13 +13,13 @@ class CreatePresupuestoTable extends Migration
      */
     public function up()
     {
-        Schema::create('presupuesto', function (Blueprint $table) {
+        Schema::create('presupuestos', function (Blueprint $table) {
             $table->bigInteger("planilla_id")->unsigned();
             $table->primary("planilla_id");
             $table->integer("precio");
-            $table->string("diagnostico");
+            $table->string("diagnostico")->nullable();
             $table->timestamps();
-            $table->foreign("planilla_id")->references("id")->on("planillas");   
+            $table->foreign("planilla_id")->references("id")->on("planillas")->constrained()->onDelete('cascade');
         });
     }
 

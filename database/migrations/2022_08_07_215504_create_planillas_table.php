@@ -19,8 +19,6 @@ class CreatePlanillasTable extends Migration
             $table->bigInteger('contacto')->nullable();
             $table->string('articulo');
             $table->string('detalle')->nullable();
-            $table->integer('presupuesto')->nullable();
-            $table->string('diagnostico')->nullable();
             $table->timestamps();
         });
     }
